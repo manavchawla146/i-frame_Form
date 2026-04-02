@@ -15,28 +15,16 @@
 
     .header {
       background: white;
-      padding: 25px 0;
+      padding: 20px;
       text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo { max-height: 85px; margin-bottom: 10px; }
-
-    .branding {
-      font-size: 21px;
-      font-weight: 600;
-      color: #1e3a8a;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .container {
       max-width: 1100px;
-      margin: 30px auto;
+      margin: 15px auto;
       background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      border-radius: 12px;
       overflow: hidden;
     }
 
@@ -50,42 +38,33 @@
 
 <body>
 
-  <div class="header">
-    <img src="https://via.placeholder.com/320x90/1e3a8a/ffffff?text=RII+LOGO" class="logo">
-    <div class="branding">Research & Insights Initiative</div>
-  </div>
+<div class="header">
+  <h2>Research & Insights Initiative</h2>
+</div>
 
-  <div class="container">
-    <iframe id="gform"
-      src="https://docs.google.com/forms/d/e/1FAIpQLScJzRo_adBUg1-Lsm7F40hSXnCWjgmFP1i8alI3eGZfkhEc2g/viewform?embedded=true">
-    </iframe>
-  </div>
+<div class="container">
+  <iframe id="gform"
+    src="https://docs.google.com/forms/d/e/1FAIpQLScJzRo_adBUg1-Lsm7F40hSXnCWjgmFP1i8alI3eGZfkhEc2g/viewform?embedded=true">
+  </iframe>
+</div>
 
-  <script>
-    let loadCount = 0;
-    let lastLoadTime = Date.now();
+<script>
+  let loadCount = 0;
+  const iframe = document.getElementById('gform');
 
-    const iframe = document.getElementById('gform');
+  iframe.onload = function () {
+    loadCount++;
 
-    iframe.onload = function () {
-      loadCount++;
+    console.log("Load count:", loadCount);
 
-      const now = Date.now();
-      const diff = now - lastLoadTime;
-      lastLoadTime = now;
-
-      console.log("Load:", loadCount, "| Gap:", diff);
-
-      // ✅ Balanced detection
-      if (loadCount >= 3 && diff > 1000) {
-        console.log("Redirecting...");
-
-        setTimeout(() => {
-          window.location.href = "https://linkxplore.com/savitarrealty";
-        }, 2000); // ⏱️ 2 sec delay
-      }
-    };
-  </script>
+    // 🔥 Faster trigger for mobile
+    if (loadCount >= 2) {
+      setTimeout(() => {
+        window.location.href = "https://linkxplore.com/savitarrealty";
+      }, 1200); // ⚡ faster (1.2 sec)
+    }
+  };
+</script>
 
 </body>
 </html>
