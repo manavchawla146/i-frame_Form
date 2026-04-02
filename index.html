@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RII Survey</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f8f9fa;
+    }
+
+    .header {
+      background: white;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo { max-height: 85px; margin-bottom: 10px; }
+
+    .branding {
+      font-size: 21px;
+      font-weight: 600;
+      color: #1e3a8a;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 85vh;
+      border: none;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 25px;
+      background: #f1f5f9;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .cta-text {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #374151;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(37,99,235,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <img src="https://via.placeholder.com/320x90/1e3a8a/ffffff?text=RII+LOGO" class="logo">
+    <div class="branding">Research & Insights Initiative</div>
+  </div>
+
+  <div class="container">
+
+    <!-- GOOGLE FORM -->
+    <iframe id="gform"
+      src="https://docs.google.com/forms/d/e/1FAIpQLScJzRo_adBUg1-Lsm7F40hSXnCWjgmFP1i8alI3eGZfkhEc2g/viewform?embedded=true">
+    </iframe>
+
+    <!-- FALLBACK BUTTON -->
+    <div class="cta-box">
+      <div class="cta-text">
+        🎉 After submitting the form, click below to try your luck!
+      </div>
+
+      <a href="https://rii-dashboard.vercel.app/" class="btn">
+        🎯 Spin Lucky Draw
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    let lastLoadTime = Date.now();
+    const iframe = document.getElementById('gform');
+
+    iframe.onload = function () {
+      const now = Date.now();
+      const diff = now - lastLoadTime;
+      lastLoadTime = now;
+
+      console.log("Iframe loaded. Time diff:", diff);
+
+      // Heuristic: submission usually causes a delayed reload
+      if (diff > 2000) {
+        console.log("Possible form submission detected");
+
+        setTimeout(() => {
+          window.location.href = "https://rii-dashboard.vercel.app/";
+        }, 1500);
+      }
+    };
+  </script>
+
+</body>
+</html>
